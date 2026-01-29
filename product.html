@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Product Detail</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    font-family: serif;
+    background:#fdfaf5;
+    margin:0;
+    padding:40px;
+}
+.container{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    gap:40px;
+    background:#fff;
+    padding:30px;
+}
+img{
+    width:400px;
+    object-fit:cover;
+}
+ul{
+    list-style:none;
+    padding:0;
+}
+li{
+    margin-bottom:10px;
+    border-bottom:1px solid #eee;
+    padding-bottom:6px;
+}
+button{
+    background:#111;
+    color:#fff;
+    padding:12px 30px;
+    border:none;
+    cursor:pointer;
+}
+@media (max-width: 768px) {
+    body{
+        padding:15px;
+    }
+
+    .container{
+        flex-direction: column;
+        padding:20px;
+        gap:20px;
+    }
+
+    img{
+        width:100%;
+        max-width:100%;
+        height:auto;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    li{
+        font-size:15px;
+    }
+
+    button{
+        width:100%;
+        margin-top:10px;
+        font-size:16px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <img id="productImage">
+    <div>
+        <h2 id="name"></h2>
+        <ul>
+            <li><b>รุ่น:</b> <span id="model"></span></li>
+            <li><b>ราคา:</b> <span id="price"></span></li>
+            <li><b>วัสดุ:</b> <span id="material"></span></li>
+            <li><b>ขนาด:</b> <span id="size"></span></li>
+            <li><b>น้ำหนัก:</b> <span id="weight"></span></li>
+            <li><b>อัญมณี:</b> <span id="gem"></span></li>
+            <li><b>การรับประกัน:</b> <span id="warranty"></span></li>
+            <li><b>การดูแลรักษา:</b> <span id="care"></span></li>
+        </ul>
+        <button onclick="history.back()"> กลับหน้าร้าน</button>
+        <button onclick="addToCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+</div>
+
+    
+
+<script>
+function addToCart(){
+    const product = {
+        name: document.getElementById("name").innerText,
+        price: document.getElementById("price").innerText,
+        image: document.getElementById("productImage").src,
+        qty: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // ถ้ามีสินค้าเดิม → เพิ่มจำนวน
+    const index = cart.findIndex(p => p.name === product.name);
+    if(index !== -1){
+        cart[index].qty += 1;
+    }else{
+        cart.push(product);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("เพิ่มสินค้าเข้าตะกร้าแล้ว 🛒");
+    updateCartCount();
+
+}
+</script>
+<script>
+const params=new URLSearchParams(location.search);
+["name","model","price","material","size","weight","gem","warranty","care"].forEach(id=>{
+  document.getElementById(id).innerText=params.get(id)||"-";
+});
+document.getElementById("productImage").src=params.get("image");
+</script>
+
+
+</body>
+</html>

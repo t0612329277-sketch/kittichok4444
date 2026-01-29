@@ -1,0 +1,205 @@
+/* =======================
+   BASIC
+======================= */
+body {
+    font-family: 'Tahoma', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* =======================
+   HEADER & NAV
+======================= */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+/* Hamburger (ซ่อนบนจอใหญ่) */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* =======================
+   PRODUCT GRID
+======================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =======================
+   FORM
+======================= */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+/* =======================
+   MODAL
+======================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    gap: 30px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* =======================
+   CART ICON
+======================= */
+.cart-icon {
+    position: relative;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* =======================
+   PRODUCT DETAIL (MOBILE)
+======================= */
+@media (max-width: 768px) {
+
+    /* HEADER */
+    .menu-toggle {
+        display: block;
+        color: white;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: #333;
+        margin-top: 10px;
+    }
+
+    nav a {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #555;
+        font-size: 16px;
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    /* MODAL */
+    .modal-content {
+        flex-direction: column;
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    /* PRODUCT DETAIL */
+    .product-detail {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .product-detail img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .product-info {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .product-info h2 {
+        font-size: 22px;
+    }
+
+    .product-info button {
+        width: 100%;
+        font-size: 18px;
+        padding: 12px;
+        margin-top: 10px;
+    }
+}

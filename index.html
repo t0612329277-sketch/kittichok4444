@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surachai Jewelry - Cassia Collection</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ข้อ 13 & 15: ตกแต่งด้วย CSS ให้สวยงาม */
+        :root {
+            --primary-bg: #efefef; /* สีครีมตามรูป */
+            --accent-black: #c81a1a;
+            --text-gray: #2e2e2c;
+        }
+
+        body {
+            font-family: 'Serif', 'Palatino Linotype', 'Book Antiqua', serif;
+            margin: 0;
+            background-color: var(--primary-bg);
+            color: var(--accent-black);
+        }
+
+        /* ข้อ 12: Responsive Design */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid #9a0404;
+            background: white;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            padding: 50px 10%;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: lighter;
+        }
+
+        .hero-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .btn-view {
+            background: var(--accent-black);
+            color: white;
+            padding: 12px 35px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* ข้อ 14: Gallery สินค้า */
+        .gallery-title {
+            padding: 0 10%;
+            margin-top: 50px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 10%;
+        }
+
+        .product-card {
+            text-align: center;
+            background: white;
+            padding-bottom: 20px;
+        }
+
+        .product-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .product-card h4 {
+            margin: 15px 0 5px;
+            font-size: 0.9rem;
+        }
+
+        .product-card p {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        /* ข้อ 8: ฟอร์มสมัครสมาชิก */
+        .registration-section {
+            background: #fff;
+            padding: 50px 10%;
+            margin-top: 50px;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #777;
+            padding: 40px 10%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: #fff;
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    nav a {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+}
+/* FIX HEADER MOBILE */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: #fff;
+}
+
+/* ชื่อเว็บ */
+header h2 {
+    color: #000;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* ปุ่มแฮมเบอร์เกอร์ */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #000;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border-top: 1px solid #eee;
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    nav a {
+        padding: 15px;
+        text-align: center;
+        color: #000;
+        border-bottom: 1px solid #eee;
+    }
+}
+/* =========================
+   MOBILE HERO FIX
+========================= */
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 30px 8%;
+        gap: 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;        /* จาก 3rem → 2rem */
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    /* NEW ARRIVAL */
+    .hero-content p:first-child {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;     /* ลดช่องว่าง */
+    }
+
+    .btn-view {
+        padding: 10px 28px;
+        font-size: 0.85rem;
+    }
+}
+/* ===== PRODUCT IMAGE FULL FRAME ===== */
+.product-card img {
+    width: 100%;
+    height: 280px;          /* กำหนดความสูงเท่ากัน */
+    object-fit: cover;      /* ครอปให้เต็มกรอบ */
+    display: block;
+}
+.product-card {
+    background: #fff;
+    overflow: hidden;   /* กันรูปทะลุกรอบ */
+}
+
+.product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+/* ===== PRODUCT CARD FIX ===== */
+.product-card {
+    background: #fff;
+    padding: 0;              /* ❗ เอา padding ออก */
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;     /* สี่เหลี่ยมพอดี */
+    overflow: hidden;
+}
+
+.img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* เต็มกรอบจริง */
+    transition: transform 0.4s ease;
+}
+
+/* hover effect */
+.product-card:hover img {
+    transform: scale(1.06);
+}
+
+/* เนื้อหา */
+.product-card h4,
+.product-card p {
+    padding: 12px 15px;
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+    <script>
+function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("show");
+}
+</script>
+
+
+    <header>
+    <h2>KITTICHOK&PARINYA SHOP</h2>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav id="nav-menu">
+        <a href="index.html">HOME</a>
+        <a href="#gallery">SHOP</a>
+        <a href="#register">REGISTER</a>
+        <a href="profile.html">PROFILE</a>
+        <a href="cart.html" class="cart-icon">🛒</a>
+        <span id="cartCount">0</span>
+
+    </nav>
+    
+</header>
+
+    <section class="hero">
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800" alt="Cassia Collection">
+        </div>
+        <div class="hero-content">
+            <p style="text-transform: uppercase; letter-spacing: 2px;">New Arrival</p>
+            <h2>CASSIA COLLECTION</h2>
+            <p>สัมผัสความงามของเครื่องประดับที่ออกแบบมาอย่างประณีต เพื่อเสริมเสน่ห์ในทุกโอกาสสำคัญของคุณ (รุ่น: Gold-Limited 2024 | ราคาเริ่มต้น: 2,900 บาท)</p>
+            <a href="javascript:alert('การชำระเงิน: โอนผ่านธนาคารกสิกรไทย เลขบัญชี 000-0-00000-0')" class="btn-view">ORDER NOW</a>
+        </div>
+    </section>
+
+    <h3 class="gallery-title" id="gallery">Product Gallery</h3>
+    
+    <div style="padding: 0 10%;"><h4>Category: Earrings (ต่างหู)</h4></div>
+    <div class="product-grid" id="earrings">
+        <div class="product-card"
+onclick="goProduct(
+'Heart Pearl Earrings',
+'HP-01',
+'1,290 บาท',
+'เงินแท้ 925 + ไข่มุกน้ำจืด',
+'เส้นผ่านศูนย์กลาง 2 ซม.',
+'5 กรัม',
+'ไข่มุก',
+'รับประกัน 1 ปี',
+'หลีกเลี่ยงน้ำหอมและสารเคมี',
+'https://gabi-label.com/cdn/shop/products/pearl-heart.jpg?v=1626596669&width=720'
+)">
+    <img src="https://gabi-label.com/cdn/shop/products/heart-pearls3.jpg?v=1626596669">
+    <h4>Heart Pearl Earrings</h4>
+    <p>รุ่น: HP-01 | ราคา: 1,290 บาท</p>
+</div>
+
+        <div class="product-card" onclick="goProduct(
+'Gold Hoop Classic','GH-02','990 บาท',
+'ทองชุบ','เส้นผ่านศูนย์กลาง 3 ซม.',
+'4 กรัม','ไม่มี','6 เดือน',
+'เก็บในถุงกันความชื้น',
+'https://cdn.shopify.com/s/files/1/2579/7674/files/4-Ana-Luisa-Jewelry-Earrings-Hoop-Earrings-Chunky-Gold-Hoop-Earrings-Gold-Classic-Hoops-Medium-Solid-Gold_7d4ca52f-047c-45a6-b945-4f4c0b475b26.jpg?v=1764599441'
+)">
+<img src="https://cdn.shopify.com/s/files/1/2579/7674/files/4-Ana-Luisa-Jewelry-Earrings-Hoop-Earrings-Chunky-Gold-Hoop-Earrings-Gold-Classic-Hoops-Medium-Solid-Gold_7d4ca52f-047c-45a6-b945-4f4c0b475b26.jpg?v=1764599441">
+<h4>Gold Hoop Classic</h4>
+<p>รุ่น: GH-02 | ราคา: 990 บาท</p>
+</div>
+
+        <div class="product-card" onclick="goProduct(
+'Diamond Studs','DS-03','3,500 บาท',
+'เงินแท้ 925','เส้นผ่านศูนย์กลาง 0.5 ซม.',
+'3 กรัม','เพชรสังเคราะห์','1 ปี',
+'หลีกเลี่ยงสารเคมี',
+'https://static.wixstatic.com/media/fc08db_7904f624b7c7482fa57fb3fffb8a64fd~mv2.jpg/v1/fill/w_560,h_622,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fc08db_7904f624b7c7482fa57fb3fffb8a64fd~mv2.jpg'
+)">
+    <img src="https://static.wixstatic.com/media/fc08db_7904f624b7c7482fa57fb3fffb8a64fd~mv2.jpg/v1/fill/w_560,h_622,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fc08db_7904f624b7c7482fa57fb3fffb8a64fd~mv2.jpg">
+    <h4>Diamond Studs</h4>
+    <p>รุ่น: DS-03 | ราคา: 3,500 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Silver Drop','SD-04','1,100 บาท',
+'เงินแท้ 925','ยาว 4 ซม.',
+'6 กรัม','ไม่มี','6 เดือน',
+'เช็ดด้วยผ้านุ่ม',
+'https://media.theavenuegallery.com/wp-content/uploads/2023/11/13171231/NV305-Freshwater-Pearl-Double-Drop-Earrings-on-Long-Hammered-Sterling-Silver-Wires-2.75-in.-drop-150.jpg'
+)">
+    <img src="https://media.theavenuegallery.com/wp-content/uploads/2023/11/13171231/NV305-Freshwater-Pearl-Double-Drop-Earrings-on-Long-Hammered-Sterling-Silver-Wires-2.75-in.-drop-150.jpg">
+    <h4>Silver Drop</h4>
+    <p>รุ่น: SD-04 | ราคา: 1,100 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Crystal Vintage','CV-05','1,450 บาท',
+'โลหะผสม + คริสตัล','ยาว 3.5 ซม.',
+'7 กรัม','คริสตัล','6 เดือน',
+'หลีกเลี่ยงความชื้น',
+'https://babeyond.com/cdn/shop/products/1-5_889dcc1b-1d60-4394-b1c3-0b3b56c31325.jpg?v=1750323499&width=2925'
+)">
+    <img src="https://babeyond.com/cdn/shop/products/1-5_889dcc1b-1d60-4394-b1c3-0b3b56c31325.jpg?v=1750323499&width=2925">
+    <h4>Crystal Vintage</h4>
+    <p>รุ่น: CV-05 | ราคา: 1,450 บาท</p>
+</div>
+
+    </div>
+
+    <div style="padding: 0 10%; margin-top: 30px;"><h4>Category: Bracelets (สร้อยข้อมือ)</h4></div>
+    <div class="product-grid" id="bracelets">
+        <div class="product-card" onclick="goProduct(
+'Pearl Chain Bracelet','PC-01','2,450 บาท',
+'เงินแท้ 925 + ไข่มุก','ยาว 16–18 ซม.',
+'12 กรัม','ไข่มุก','1 ปี',
+'เช็ดด้วยผ้านุ่มหลังใช้งาน',
+'https://simpleanddainty.com/cdn/shop/files/pearlchainbraceletgfnew_2000x.jpg?v=1700161991'
+)">
+<img src="https://simpleanddainty.com/cdn/shop/files/pearlchainbraceletgfnew_2000x.jpg?v=1700161991">
+<h4>Pearl Chain Bracelet</h4>
+<p>รุ่น: PC-01 | ราคา: 2,450 บาท</p>
+</div>
+
+        <div class="product-card" onclick="goProduct(
+'Gold Link Cuff','GL-02','3,200 บาท',
+'ทองชุบพรีเมียม','ฟรีไซส์',
+'18 กรัม','ไม่มี','1 ปี',
+'หลีกเลี่ยงน้ำ',
+'https://twopairs.com.au/cdn/shop/files/Screenshot-2024-07-22-143422_400x.png?v=1721624694'
+)">
+<img src="https://twopairs.com.au/cdn/shop/files/Screenshot-2024-07-22-143422_400x.png?v=1721624694">
+<h4>Gold Link Cuff</h4>
+<p>รุ่น: GL-02 | ราคา: 3,200 บาท</p>
+</div>
+
+        <div class="product-card" onclick="goProduct(
+'Heart Clean Bracelet','HC-03','1,890 บาท',
+'เงินแท้ 925','ยาว 16–18 ซม.',
+'10 กรัม','ไม่มี','1 ปี',
+'หลีกเลี่ยงน้ำหอม',
+'https://jcpenney.scene7.com/is/image/JCPenney/DP0320202413032748M?resmode=sharp2&op_sharpen=1&wid=350&hei=350'
+)">
+    <img src="https://jcpenney.scene7.com/is/image/JCPenney/DP0320202413032748M?resmode=sharp2&op_sharpen=1&wid=350&hei=350">
+    <h4>Heart Clean Bracelet</h4>
+    <p>รุ่น: HC-03 | ราคา: 1,890 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Minimalist Silver','MS-04','1,550 บาท',
+'เงินแท้ 925','ฟรีไซส์',
+'9 กรัม','ไม่มี','1 ปี',
+'เช็ดด้วยผ้าแห้ง',
+'https://frequencyparisibiza.com/cdn/shop/files/Frequency_Paris-Ibiza_Presence_Beaded_Chain_Bracelet_Silver_on_White.webp?v=1767207537&width=3840'
+)">
+    <img src="https://frequencyparisibiza.com/cdn/shop/files/Frequency_Paris-Ibiza_Presence_Beaded_Chain_Bracelet_Silver_on_White.webp?v=1767207537&width=3840">
+    <h4>Minimalist Silver</h4>
+    <p>รุ่น: MS-04 | ราคา: 1,550 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Luxury Diamond Chain','LD-05','5,900 บาท',
+'ทองชุบ + เพชรสังเคราะห์','ยาว 18 ซม.',
+'15 กรัม','เพชรสังเคราะห์','1 ปี',
+'เก็บในกล่องหลังใช้งาน',
+'https://5.imimg.com/data5/SELLER/Default/2025/9/541707052/XQ/NS/DU/188414932/925-sterling-silver-vvs-moissanite-diamond-cuban-link-bracelet.png'
+)">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2025/9/541707052/XQ/NS/DU/188414932/925-sterling-silver-vvs-moissanite-diamond-cuban-link-bracelet.png">
+    <h4>Luxury Diamond Chain</h4>
+    <p>รุ่น: LD-05 | ราคา: 5,900 บาท</p>
+</div>
+
+    </div>
+
+    <div style="padding: 0 10%; margin-top: 30px;"><h4>Category: Rings (แหวน)</h4></div>
+    <div class="product-grid" id="rings">
+        <div class="product-card" onclick="goProduct(
+'Classic Engagement Ring','ER-01','15,000 บาท',
+'ทองคำขาว','ไซส์ 52–58',
+'6 กรัม','เพชรแท้','ตลอดอายุการใช้งาน',
+'นำเข้าตรวจเช็กทุก 6 เดือน',
+'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600'
+)">
+<img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=400">
+<h4>Classic Engagement Ring</h4>
+<p>รุ่น: ER-01 | ราคา: 15,000 บาท</p>
+</div>
+
+        <div class="product-card" onclick="goProduct(
+'Rose Gold Band','RG-02','4,500 บาท',
+'โรสโกลด์ชุบ','ไซส์ 52–58',
+'5 กรัม','ไม่มี','1 ปี',
+'หลีกเลี่ยงการกระแทก',
+'https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=600'
+)">
+    <img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=400">
+    <h4>Rose Gold Band</h4>
+    <p>รุ่น: RG-02 | ราคา: 4,500 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Vintage Emerald','VE-03','8,900 บาท',
+'เงินแท้ 925','ไซส์ 54–60',
+'7 กรัม','มรกต','1 ปี',
+'นำเข้าตรวจเช็กทุก 6 เดือน',
+'https://www.luojewelry.com/cdn/shop/products/RPO680579-EM_20_281_29.jpg?v=1682744269&width=2048'
+)">
+    <img src="https://www.luojewelry.com/cdn/shop/products/RPO680579-EM_20_281_29.jpg?v=1682744269&width=2048">
+    <h4>Vintage Emerald</h4>
+    <p>รุ่น: VE-03 | ราคา: 8,900 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Infinity Silver Ring','IS-04','2,100 บาท',
+'เงินแท้ 925','ไซส์ 52–58',
+'4 กรัม','ไม่มี','1 ปี',
+'เช็ดด้วยผ้านุ่ม',
+'https://love925.com/cdn/shop/files/2silverfront_18.jpg?v=1725883394'
+)">
+    <img src="https://love925.com/cdn/shop/files/silver-ring-infinity.jpg?v=1756301556">
+    <h4>Infinity Silver Ring</h4>
+    <p>รุ่น: IS-04 | ราคา: 2,100 บาท</p>
+</div>
+
+<div class="product-card" onclick="goProduct(
+'Black Onyx Ring','BO-05','3,800 บาท',
+'เงินแท้ 925','ไซส์ 54–60',
+'6 กรัม','ออนิกซ์','1 ปี',
+'หลีกเลี่ยงการขูดขีด',
+'https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=600'
+)">
+    <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=400">
+    <h4>Black Onyx Ring</h4>
+    <p>รุ่น: BO-05 | ราคา: 3,800 บาท</p>
+</div>
+<!-- สินค้าที่เพิ่มจากแอดมิน -->
+<div id="admin-products"></div>
+
+
+    </div>
+
+    <section class="registration-section" id="register">
+        <div class="register-form">
+            <h2 style="text-align: center; font-weight: lighter;">BECOME A MEMBER</h2>
+            <form action="#">
+                <input type="text" placeholder="ชื่อ" required>
+                <input type="text" placeholder="นามสกุล" required>
+                <input type="tel" placeholder="เบอร์โทรศัพท์" required>
+                <input type="email" placeholder="อีเมล" required>
+                <textarea rows="4" placeholder="ที่อยู่ในการจัดส่ง"></textarea>
+                <button type="submit" class="btn-view" style="width: 100%; border: none; cursor: pointer;">ยืนยันการสมัคร</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="profile">
+        <div>
+            <h3>ABOUT ME</h3>
+            <p>จัดทำโดย: นายกิตติโชค วงษ์ตรี (Kittichok Wongtree)</p>
+            <p>รหัสนักศึกษา: 68319090020</p>
+            <p>จัดทำโดย: นายปริญญา โนวะ (Parinya Nowa)</p>
+            <p>รหัสนักศึกษา: 68319090028</p>
+        </div>
+        <div>
+            <h3>CONTACT</h3>
+            <p>Email: kittichok@ntc.ac.th</p>
+            <p>โทร: 08x-xxx-xxxx</p>
+        </div>
+    </footer>
+    <script src="JavaScript.js"></script>
+   <script>
+const adminProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+adminProducts.forEach(p => {
+  const target = document.getElementById(p.category);
+  if (!target) return;
+
+  const card = document.createElement("div");
+  card.className = "product-card";
+
+  card.onclick = () => goProduct(
+    p.name,
+    p.model || "-",
+    (p.price ? p.price + " บาท" : "-"),
+    p.material || "-",
+    p.size || "-",
+    p.weight || "-",
+    p.gem || "-",
+    p.warranty || "-",
+    p.care || "-",
+    p.image || ""
+  );
+
+  card.innerHTML = `
+    <img src="${p.image}">
+    <h4>${p.name}</h4>
+    <p>รุ่น: ${p.model || "-"} | ราคา: ${p.price || "-"} บาท</p>
+  `;
+
+  target.appendChild(card);
+});
+</script>
+
+</body>
+</html>

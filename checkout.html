@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<style>
+body{
+    font-family: serif;
+    background:#fdfaf5;
+    padding:40px;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+}
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+}
+button{
+    background:#111;
+    color:#fff;
+    padding:12px 25px;
+    border:none;
+    cursor:pointer;
+}
+.summary{
+    background:#fafafa;
+    padding:15px;
+    margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Checkout</h2>
+
+    <h3>🛍️ รายละเอียดคำสั่งซื้อ</h3>
+<div id="summary"></div>
+<div id="grand-total" style="margin-top:15px;font-weight:bold;"></div>
+
+
+    <h3>ข้อมูลผู้สั่งซื้อ</h3>
+    <input type="text" placeholder="ชื่อ - นามสกุล">
+    <input type="tel" placeholder="เบอร์โทรศัพท์">
+    <input type="email" placeholder="อีเมล">
+    <textarea placeholder="ที่อยู่จัดส่ง"></textarea>
+
+    <h3>วิธีการชำระเงิน</h3>
+    <select id="payment" onchange="changePayment()">
+        <option value="">-- เลือกวิธีการชำระเงิน --</option>
+        <option value="bank">โอนผ่านธนาคาร</option>
+        <option value="cod">เก็บเงินปลายทาง</option>
+        <option value="card">บัตรเครดิต / เดบิต</option>
+    </select>
+
+    <div id="bank" style="display:none;">
+        <p><b>บัญชีธนาคาร</b></p>
+        <p>ธนาคารกสิกรไทย<br>
+           เลขที่บัญชี: 123-4-56789-0<br>
+           ชื่อบัญชี: KITTICHOK&PARINYA SHOP   </p>
+        <input type="file">
+    </div>
+
+    <div id="cod" style="display:none;">
+        <p>💡 ชำระเงินเมื่อได้รับสินค้า</p>
+    </div>
+
+    <div id="card" style="display:none;">
+        <input type="text" placeholder="หมายเลขบัตร">
+        <input type="text" placeholder="ชื่อบนบัตร">
+        <input type="text" placeholder="วันหมดอายุ (MM/YY)">
+        <input type="text" placeholder="CVV">
+    </div>
+
+    <!-- ✅ ปุ่มสำคัญอยู่ตรงนี้ -->
+    <button onclick="confirmOrder()" style="margin-top:20px;">
+        ยืนยันการชำระเงิน
+    </button>
+</div>
+
+<script>
+function changePayment(){
+    document.getElementById("bank").style.display = "none";
+    document.getElementById("cod").style.display = "none";
+    document.getElementById("card").style.display = "none";
+
+    const method = document.getElementById("payment").value;
+    if(method){
+        document.getElementById(method).style.display = "block";
+    }
+}
+
+function confirmOrder(){
+    const method = document.getElementById("payment").value;
+    if(method === ""){
+        alert("กรุณาเลือกวิธีการชำระเงิน");
+        return;
+    }
+
+    alert("ชำระเงินสำเร็จ 🎉 ขอบคุณที่ใช้บริการ");
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>

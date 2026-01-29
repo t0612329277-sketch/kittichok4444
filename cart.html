@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Cart</title>
+<style>
+body{
+    font-family: serif;
+    background:#fdfaf5;
+    padding:40px;
+}
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background:#fff;
+    padding:15px;
+    margin-bottom:15px;
+}
+.cart-item img{
+    width:120px;
+}
+.total{
+    font-size:20px;
+    margin-top:30px;
+}
+button{
+    padding:10px 20px;
+    background:#111;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+.cart-item button{
+    width:30px;
+    height:30px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<h2>🛒 ตะกร้าสินค้า</h2>
+
+<div id="cart"></div>
+
+<div class="total" id="total"></div>
+
+<div style="margin-top:20px;">
+    <button onclick="history.back()">กลับหน้าร้าน</button>
+    <button onclick="location.href='checkout.html'">
+        ไปชำระเงิน
+    </button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cartDiv = document.getElementById("cart");
+
+function renderCart(){
+    cartDiv.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+        const priceNumber = parseInt(item.price.replace(/[^0-9]/g,""));
+        total += priceNumber * item.qty;
+
+        cartDiv.innerHTML += `
+        <div class="cart-item">
+            <img src="${item.image}">
+            <div>
+                <h4>${item.name}</h4>
+                <p>${item.price}</p>
+
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <button onclick="decrease(${index})">−</button>
+                    <span>${item.qty}</span>
+                    <button onclick="increase(${index})">+</button>
+                </div>
+
+                <p>รวม: ${(priceNumber * item.qty).toLocaleString()} บาท</p>
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText =
+        "ราคารวมทั้งหมด: " + total.toLocaleString() + " บาท";
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function increase(index){
+    cart[index].qty++;
+    renderCart();
+}
+
+function decrease(index){
+    cart[index].qty--;
+    if(cart[index].qty <= 0){
+        cart.splice(index,1);
+    }
+    renderCart();
+}
+
+function clearCart(){
+    localStorage.removeItem("cart");
+    location.reload();
+}
+
+renderCart();
+</script>
+
+
+</body>
+</html>

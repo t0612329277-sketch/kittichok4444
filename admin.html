@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+
+<style>
+body{
+    font-family: serif;
+    background:#fdfaf5;
+    padding:40px;
+}
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+}
+.grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:15px;
+}
+input, select{
+    padding:12px;
+    border:1px solid #0f0e0e;
+    width:100%;
+}
+button{
+    padding:14px;
+    background:#111;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    margin-top:10px;
+}
+.list{
+    margin-top:40px;
+}
+.item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    border-bottom:1px solid #eee;
+    padding:15px 0;
+}
+.item img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+}
+.item button{
+    padding:8px 14px;
+}
+.delete{
+    background:#b00000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>🛠 ระบบแอดมิน</h2>
+
+<div class="grid">
+<input id="name" placeholder="ชื่อสินค้า">
+<input type="text" id="model" placeholder="รุ่นสินค้า (เช่น HP-01)">
+
+
+<input id="price" type="number" placeholder="ราคา">
+<input id="material" placeholder="วัสดุ">
+
+<input id="size" placeholder="ขนาด">
+<input id="weight" placeholder="น้ำหนัก">
+
+<input id="gem" placeholder="อัญมณี">
+<input id="warranty" placeholder="การรับประกัน">
+
+<input id="care" placeholder="การดูแลรักษา">
+<input id="image" placeholder="URL รูปสินค้า">
+
+<select id="category">
+<option value="">-- เลือกหมวดสินค้า --</option>
+<option value="earrings">ต่างหู</option>
+<option value="bracelets">สร้อยข้อมือ</option> 
+<option value="rings">แหวน</option>
+</select>
+</div>
+
+<button type="button" onclick="addProduct()">เพิ่ม / แก้ไขสินค้า</button>
+
+
+<div class="list" id="list"></div>
+</div>
+
+<script>
+let editId = null;
+
+function getProducts(){
+    return JSON.parse(localStorage.getItem("products")) || [];
+}
+
+function saveProducts(p){
+    localStorage.setItem("products", JSON.stringify(p));
+}
+
+function addProduct(){
+    const name = document.getElementById("name").value;
+    const model = document.getElementById("model").value;
+    const price = document.getElementById("price").value;
+    const material = document.getElementById("material").value || "-";
+    const size = document.getElementById("size").value || "-";
+    const weight = document.getElementById("weight").value || "-";
+    const gem = document.getElementById("gem").value || "-";
+    const warranty = document.getElementById("warranty").value || "-";
+    const care = document.getElementById("care").value || "-";
+    const image = document.getElementById("image").value;
+    const category = document.getElementById("category").value;
+
+    if(!name || !model || !price || !image || !category){
+        alert("กรอกข้อมูลให้ครบ");
+        return;
+    }
+
+    const products = getProducts();
+
+    if(editId){
+        const p = products.find(p=>p.id===editId);
+        Object.assign(p,{
+            name,model,price,material,size,weight,gem,warranty,care,image,category
+        });
+        editId = null;
+    }else{
+        products.push({
+            id: Date.now(),
+            name,model,price,material,size,weight,gem,warranty,care,image,category
+        });
+    }
+
+    saveProducts(products);
+    clearForm();
+    render();
+}
+
+function editProduct(id){
+    const p = getProducts().find(p=>p.id===id);
+    if(!p) return;
+
+    editId = id;
+    name.value = p.name;
+    model.value = p.model;
+    price.value = p.price;
+    material.value = p.material;
+    size.value = p.size;
+    weight.value = p.weight;
+    gem.value = p.gem;
+    warranty.value = p.warranty;
+    care.value = p.care;
+    image.value = p.image;
+    category.value = p.category;
+}
+
+function deleteProduct(id){
+    if(!confirm("ลบสินค้า?")) return;
+    saveProducts(getProducts().filter(p=>p.id!==id));
+    render();
+}
+
+function clearForm(){
+    document.querySelectorAll("input").forEach(i=>i.value="");
+    category.value="";
+}
+
+function render(){
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    getProducts().forEach(p=>{
+        list.innerHTML += `
+        <div class="item">
+            <img src="${p.image}">
+            <div>
+                <b>${p.name}</b><br>
+                รุ่น: ${p.model} | ${p.price} บาท
+            </div>
+            <button onclick="editProduct(${p.id})">แก้ไข</button>
+            <button class="delete" onclick="deleteProduct(${p.id})">ลบ</button>
+        </div>`;
+    });
+}
+
+render();
+</script>
+
+
+</body>
+</html>
